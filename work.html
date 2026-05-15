@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Work — Kong.Filmz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #1a1a1a;
+      --white:   #ffffff;
+      --green:   #1a4a3a;
+      --green-hi:#22604a;
+      --gold:    #C9A84C;
+      --gray:    #666666;
+      --surface: #f5f5f3;
+      --muted:   #999999;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 22px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26,74,58,0.1);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: var(--green); }
+    .nav-back {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--green); }
+
+    /* HERO */
+    .page-hero {
+      padding: 160px 40px 80px;
+      text-align: center;
+      background: var(--white);
+    }
+    .page-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+    .page-title em { font-style: italic; color: var(--gold); }
+    .page-sub {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .divider {
+      width: 60px; height: 2px;
+      background: var(--green);
+      margin: 24px auto 0;
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--green);
+      padding: 32px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* WORK GRID */
+    .work-section {
+      padding: 80px 40px;
+      background: var(--white);
+    }
+    .work-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .work-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(26,74,58,0.12);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    /* VIDEO CARD */
+    .video-card {
+      background: var(--surface);
+      border: 1px solid rgba(26,74,58,0.1);
+      border-top: 3px solid var(--green);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, border-top-color 0.3s;
+    }
+    .video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+      border-top-color: var(--gold);
+    }
+    .video-embed {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      background: #111;
+    }
+    .video-embed iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .video-placeholder {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: #0a0a0a;
+    }
+    .video-placeholder-icon { font-size: 2.5rem; opacity: 0.4; }
+    .video-info { padding: 20px 24px; }
+    .video-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+    .video-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .video-tag {
+      display: inline-block;
+      background: rgba(26,74,58,0.08);
+      color: var(--green);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+      margin-top: 8px;
+    }
+
+    /* RESULT CARD */
+    .result-card {
+      background: var(--surface);
+      border: 1px solid rgba(26,74,58,0.1);
+      border-left: 3px solid var(--gold);
+      padding: 32px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .result-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    }
+    .result-card-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .result-card-label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .result-card-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.65; }
+
+    /* ADD CONTENT NOTE */
+    .add-note {
+      background: rgba(26,74,58,0.04);
+      border: 1px dashed rgba(26,74,58,0.2);
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .add-note strong { color: var(--green); display: block; margin-bottom: 8px; font-size: 1rem; }
+
+    /* CTA */
+    .work-cta {
+      background: var(--green);
+      padding: 100px 40px;
+      text-align: center;
+    }
+    .work-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .work-cta p {
+      color: rgba(255,255,255,0.65);
+      font-size: 1rem;
+      margin-bottom: 40px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: #000;
+      padding: 18px 40px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      transition: background 0.25s, transform 0.25s;
+      display: inline-block;
+    }
+    .btn-gold:hover { background: #e0bb5a; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 40px;
+      background: var(--white);
+      border-top: 1px solid rgba(26,74,58,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer p { color: var(--muted); font-size: 0.8rem; }
+    footer span { color: var(--green); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-link:hover { color: var(--green); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .page-hero { padding: 120px 24px 60px; }
+      .work-section { padding: 60px 24px; }
+      .stats-bar { gap: 40px; padding: 28px 24px; }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Kong<span>.</span>Filmz</a>
+    <a href="index.html" class="nav-back">← Back to Home</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <p class="page-label">Portfolio</p>
+    <h1 class="page-title">Real Work.<br><em>Real Results.</em></h1>
+    <p class="page-sub">Every video here was made for a local contractor. Real clients, real campaigns, real leads.</p>
+    <div class="divider"></div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-num">72</span>
+      <p class="stat-label">Leads Generated</p>
+    </div>
+    <div class="stat">
+      <span class="stat-num">2M+</span>
+      <p class="stat-label">Total Views</p>
+    </div>
+    <div class="stat">
+      <span class="stat-num">4</span>
+      <p class="stat-label">Months</p>
+    </div>
+  </div>
+
+  <!-- WORK SECTION -->
+  <div class="work-section">
+
+    <!-- Videos -->
+    <h2 class="work-section-title fade-up">Client Videos</h2>
+    <div class="work-grid fade-up">
+
+      <!-- Add your videos here — replace src with YouTube embed URL -->
+      <!-- Example: <iframe src="https://www.youtube.com/embed/VIDEO_ID"></iframe> -->
+
+      <div class="video-card">
+        <div class="video-embed">
+          <div class="video-placeholder">
+            <span class="video-placeholder-icon">🎬</span>
+            Coming Soon
+          </div>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Client Video — Minneapolis</p>
+          <p class="video-meta">Kong.Filmz</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-embed">
+          <div class="video-placeholder">
+            <span class="video-placeholder-icon">🎬</span>
+            Coming Soon
+          </div>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Client Video — Minneapolis</p>
+          <p class="video-meta">Kong.Filmz</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-embed">
+          <div class="video-placeholder">
+            <span class="video-placeholder-icon">🎬</span>
+            Coming Soon
+          </div>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Client Video — Minneapolis</p>
+          <p class="video-meta">Kong.Filmz</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="add-note fade-up">
+      <strong>Your work goes here</strong>
+      Paste YouTube/Instagram links and I'll embed them — or drop raw video files and I'll add them directly.
+    </div>
+
+    <!-- Results -->
+    <h2 class="work-section-title fade-up" style="margin-top: 80px;">Campaign Results</h2>
+    <div class="work-grid fade-up">
+      <div class="result-card">
+        <div class="result-card-number">72</div>
+        <p class="result-card-label">Leads in 4 Months</p>
+        <p class="result-card-desc">One roofing contractor. One campaign. 72 qualified inbound leads through targeted Meta video ads.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-card-number">2M+</div>
+        <p class="result-card-label">Total Views</p>
+        <p class="result-card-desc">Organic + paid reach across Facebook and Instagram. Content that actually stops the scroll.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-card-number">$0</div>
+        <p class="result-card-label">Extra Effort From the Client</p>
+        <p class="result-card-desc">They showed up. We handled the script, filming, editing, and ad management. That's it.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="work-cta">
+    <h2>Want Results Like This?</h2>
+    <p>Book a free call and let's talk about what we can build for your business.</p>
+    <a href="https://calendly.com/bykongfilmz/30min" target="_blank" class="btn-gold">Book a Free Call</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <p>© 2026 <span>Kong.Filmz</span> — Minneapolis, MN</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:bykongfilmz@gmail.com" class="footer-link">✉ bykongfilmz@gmail.com</a>
+      <a href="https://www.instagram.com/kong.filmz" target="_blank" class="footer-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @kong.filmz
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
